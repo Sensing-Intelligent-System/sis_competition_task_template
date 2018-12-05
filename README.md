@@ -46,7 +46,7 @@ You need to submit by using this template for each task.
 
 > run_task.sh           (You don't need to modify this file)
 
-> master_task.launch    (You have to determine which node you need to launch and write in this file)
+> master_task.launch    (You have to determine which node you need to launch in the task and write in this file)
 
 > docker_build.sh       (If you want to build docker file, please execute/source this shell)
 
