@@ -67,4 +67,10 @@ tx2 $ docker tag - t sis_competition [dockerhub account]/sis_competition:[task_n
 
 tx2 $ docker push [dockerhub account]/sis_competition:[task_name]
 
-  
+## How to run
+
+tx2 $ docker run -it --name [name] --net host --privileged -v /dev/bus/usb:/dev/bus/usb [dockerhub account]/sis_competition:[task_name]
+
+***If you want to debug by using bash, run this.***
+
+tx2 $ docker run -it --name [name] --net host --privileged -v /dev/bus/usb:/dev/bus/usb [dockerhub account]/sis_competition:[task_name] bash
