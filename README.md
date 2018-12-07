@@ -69,11 +69,11 @@ tx2 $ docker push [dockerhub account]/sis_competition:[task_name]
 
 ## How to run
 
-tx2 $ docker run -it --name [name] --net host --privileged -v /dev/bus/usb:/dev/bus/usb [dockerhub account]/sis_competition:[task_name]
+tx2 $ docker run -it [--rm] --name [name] --net host --privileged -v /dev/bus/usb:/dev/bus/usb [dockerhub account]/sis_competition:[task_name]
 
 ***If you want to debug by using bash, run this.***
 
-tx2 $ docker run -it --name [name] --net host --privileged -v /dev/bus/usb:/dev/bus/usb [dockerhub account]/sis_competition:[task_name] bash
+tx2 $ docker run -it [--rm] --name [name] --net host --privileged -v /dev/bus/usb:/dev/bus/usb [dockerhub account]/sis_competition:[task_name] bash
 
 ***If you want to debug with visualization, run the following command***
 
@@ -85,4 +85,4 @@ TX2 $ x11vnc
 
 laptop $ vncviewer  -quality 0 -encodings "tight"  [your tx2 hostname].local:[port]
 
-TX2 $  docker run -it --name [name] --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --privileged -v /dev/bus/usb:/dev/bus/usb  [dockerhub account]/sis_competition:[task_name]
+TX2 $  docker run -it [--rm] --name [name] --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --privileged -v /dev/bus/usb:/dev/bus/usb  [dockerhub account]/sis_competition:[task_name]
