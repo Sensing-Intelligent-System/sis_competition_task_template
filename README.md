@@ -81,7 +81,7 @@ TX2 $ export DISPLAY=:0 && xrandr --fb 1800x900
 
 TX2 $ x11vnc
 
-After running x11vnc, you'll see available port showed on terminal.
+**After running x11vnc, you'll see available port showed on terminal.**
 
 laptop $ vncviewer  -quality 0 -encodings "tight"  [your tx2 hostname].local:[port]
 
