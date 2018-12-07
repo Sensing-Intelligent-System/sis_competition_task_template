@@ -74,3 +74,15 @@ tx2 $ docker run -it --name [name] --net host --privileged -v /dev/bus/usb:/dev/
 ***If you want to debug by using bash, run this.***
 
 tx2 $ docker run -it --name [name] --net host --privileged -v /dev/bus/usb:/dev/bus/usb [dockerhub account]/sis_competition:[task_name] bash
+
+***If you want to debug with visualization, run the following command***
+
+TX2 $ export DISPLAY=:0 && xrandr --fb 1800x900
+
+TX2 $ x11vnc
+
+After running x11vnc, you'll see available port showed on terminal.
+
+laptop $ vncviewer  -quality 0 -encodings "tight"  [your tx2 hostname].local:[port]
+
+TX2 $  docker run -it --name [name] --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --privileged -v /dev/bus/usb:/dev/bus/usb  [dockerhub account]/sis_competition:[task_name]
