@@ -4,9 +4,7 @@ import rospy
 
 class hello_world(object):
 	def __init__(self):
-		while(True):
-			rospy.loginfo("hello World")
-
+		for i in range(100): rospy.loginfo("hello World")
 	def onShutdown(self):
 		rospy.loginfo("Shutdown !!!")
 
