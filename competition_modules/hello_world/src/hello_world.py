@@ -4,9 +4,10 @@ import rospy
 
 class hello_world(object):
 	def __init__(self):
-		rospy.loginfo("hello World")
+		while(True):
+			rospy.loginfo("hello World")
 
-	def on_shutdown(self):
+	def onShutdown(self):
 		rospy.loginfo("Shutdown !!!")
 
 if __name__ == '__main__': 
