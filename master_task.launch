@@ -1,6 +1,3 @@
 <launch>
-
-  <!-- TODO -->
-  <!-- You need to determine which node you wand to launch in this task -->
-
+<include file="$(find hello_world)/launch/hello_world.launch"></include>
 </launch>
