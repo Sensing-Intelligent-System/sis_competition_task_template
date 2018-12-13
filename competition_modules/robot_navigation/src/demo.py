@@ -12,7 +12,7 @@ class TagTracker(object):
         self.tag_id_track = 1
 
         # the distance threshold between car and tag
-        self.thres_distance = 0.6
+        self.thres_distance = 0.5
 
         # the angle threshold between car and tag
         self.thres_angle = 0.1
