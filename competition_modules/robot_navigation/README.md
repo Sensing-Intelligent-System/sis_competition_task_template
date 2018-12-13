@@ -6,11 +6,11 @@ robot_navigate_node.py defines the service and demo.py demonstrate how to call t
 To run the demonstration, please put the robot in the middle of tag 4 and tag 6 and run with folowing command
 
 `
-mm_pi $ roslaunch sis_mobile config.launch x:=1 y:=0.9 th:=0
+mm_pi $ roslaunch sis_mobile navigation_pi.launch x:=1 y:=0.9 th:=0
 `
 
 `
-docker $ roslaunch robot_navigation navigation_pi.launch
+docker $ roslaunch robot_navigation robot_navigation.launch
 `
 
 `
