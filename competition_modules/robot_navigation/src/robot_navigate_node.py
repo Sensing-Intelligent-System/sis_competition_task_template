@@ -20,7 +20,8 @@ class RobotNavigate(object):
     def cbNavigate(self, req):
         print "cbNavigate"        
         self.client.wait_for_server()
-        goal = MoveBaseGoal()
+        # declare goal as geometry_msgs::PoseStamped
+        goal = MoveBaseGoal() 
         listener = tf.TransformListener()
         tag_id = req.id
         tag_tf = "tag_" + str(tag_id)
