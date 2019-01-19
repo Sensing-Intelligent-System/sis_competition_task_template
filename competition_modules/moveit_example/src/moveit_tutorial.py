@@ -57,10 +57,10 @@ class moveit_tutorial(object):
 
                 ### close gripper
 
-                rospy.sleep(2)
-                grip_data = Float64()
-                grip_data.data = 1.2
-                self.pub_gripper.publish(grip_data)
+                #rospy.sleep(2)
+                #grip_data = Float64()
+                #grip_data.data = 1.2
+                #self.pub_gripper.publish(grip_data)
 
 		### Go home
 		self.home() 
