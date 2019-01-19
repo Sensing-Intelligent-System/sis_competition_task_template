@@ -54,6 +54,14 @@ class moveit_tutorial(object):
 		print "============ Printing robot state", self.robot.get_current_state()
 		print ""
 		
+
+                ### close gripper
+
+                rospy.sleep(2)
+                grip_data = Float64()
+                grip_data.data = 1.2
+                self.pub_gripper.publish(grip_data)
+
 		### Go home
 		self.home() 
 
@@ -62,8 +70,8 @@ class moveit_tutorial(object):
 		# After determining a specific point where arm should move, we input x,y,z,degree to calculate joint value for each wrist. 
 
 		pose_goal = Pose()
-		pose_goal.position.x = 0.141
-		pose_goal.position.y = 0.020
+		pose_goal.position.x = 0.146
+		pose_goal.position.y = 0.022
 		pose_goal.position.z = 0.042
 		# ik_4dof.ik_solver(x, y, z, degree)
 		joint_value = ik_4dof.ik_solver(pose_goal.position.x, pose_goal.position.y, pose_goal.position.z, -90)
@@ -81,10 +89,10 @@ class moveit_tutorial(object):
 
 		### close gripper
 
-		rospy.sleep(2)
-		grip_data = Float64()
-		grip_data.data = 2.0 
-		self.pub_gripper.publish(grip_data)
+		#rospy.sleep(2)
+		#grip_data = Float64()
+		#grip_data.data = 2.0 
+		#self.pub_gripper.publish(grip_data)
 
 		### open gripper
 
