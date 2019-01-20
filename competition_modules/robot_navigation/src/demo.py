@@ -12,7 +12,7 @@ class TagTracker(object):
         self.tag_id_track = 1
         # setup service proxy
         rospy.wait_for_service('/robot_navigate')
-        call_service()
+        self.call_service()
     def call_service(self):
         parking = rospy.ServiceProxy('/robot_navigate', robot_navigation)
         resp = parking(self.tag_id_track)
