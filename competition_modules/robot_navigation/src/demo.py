@@ -37,7 +37,7 @@ class TagTracker(object):
             print "lock == true"
             return
         if len(msg.detections) == 0:
-            print "no detection of id %d"%{tag_id_track}
+            print "no detection of id %d"%{self.tag_id_track}
             return
         if self.done_tracking == True:
             print "done tracking"

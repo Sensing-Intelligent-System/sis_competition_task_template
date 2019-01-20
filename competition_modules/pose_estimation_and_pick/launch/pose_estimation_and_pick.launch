@@ -1,0 +1,3 @@
+<launch>
+<node pkg="pose_estimation_and_pick" type="moveit_cssp.py" name="moveit_cssp" output="screen"/>
+</launch>

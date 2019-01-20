@@ -1,0 +1,7 @@
+<launch>
+  <!-- Apriltag -->
+  <!-- include file="$(find apriltags_ros)/launch/assignment.launch"/ -->
+  <!-- Calculate distance node -->
+  <!-- place_to_box -->
+  <node name="place_to_box" pkg="place_to_box" type="place_to_box_go.py" output="screen" required="true"/>
+</launch>
