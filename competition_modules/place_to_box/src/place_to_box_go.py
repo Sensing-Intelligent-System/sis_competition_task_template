@@ -64,14 +64,14 @@ class moveit_tutorial(object):
 			print "Allen close"
 			### close gripper
 	
-			rospy.sleep(2)
-			grip_data = Float64()
-			grip_data.data = 2.0 
-			self.pub_gripper.publish(grip_data)
+			#rospy.sleep(2)
+			#grip_data = Float64()
+			#grip_data.data = 2.0 
+			#self.pub_gripper.publish(grip_data)
 			# ############################
 			print "Allen home"
 			### Go home
-			self.home() 
+			#self.home() 
 	
 			############################ Method : Using IK to calculate joint value ############################
 	

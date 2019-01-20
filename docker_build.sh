@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-docker build -t sis_competition -f Dockerfile .
+docker build --no-cache -t sis_competition -f Dockerfile .
