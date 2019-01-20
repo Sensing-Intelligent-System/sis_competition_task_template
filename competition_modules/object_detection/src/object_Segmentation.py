@@ -45,7 +45,7 @@ cy = msg.P[6]
 
 def main():
     model_name ="FCNs_mini_competition_batch10_epoch99_RMSprop_lr0.0001.pkl"
-    model_dir  = "./model"
+    model_dir  = "/home/nvidia/sis_competition_task_template/competition_modules/object_detection/src/model"
     segmentation = Segmentation(os.path.join(model_dir, model_name))
     #    Subscribe to both RGB and Depth images with a Synchronizer
     image_sub = message_filters.Subscriber("/camera/rgb/image_rect_color", Image)
@@ -85,9 +85,9 @@ def rosRGBDCallBack(rgb_data, depth_data,segmentation):
     except CvBridgeError as e:
         print(e)
     pred = segmentation.seg_one_frame(cv_image)
-
-    cv2.imwrite("/home/nvidia/pred_1.bmp",cv_image)
-    img_result_pub.publish(cv_bridge.cv2_to_imgmsg(cv_image,
+    cv2.imshow("pred",pred)
+    cv2.imwrite("/home/nvidia/pred_1.bmp",pred)
+    img_result_pub.publish(cv_bridge.cv2_to_imgmsg(pred,
         encoding="passthrough"))
 
 def getXYZ(xp, yp, zc, fx,fy,cx,cy):
