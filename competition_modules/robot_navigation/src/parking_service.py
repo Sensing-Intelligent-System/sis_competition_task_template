@@ -102,7 +102,8 @@ class Parking(object):
 				rospy.sleep(time/2)
 				cmd = Twist()
                                 self.pub_cmd.publish(cmd)
-				print "reach goal"
+				print "reach"
+			elif dist <= self.dist_thres:
 				if self.sign == 0:
 					self.sign = 1
 				else:
