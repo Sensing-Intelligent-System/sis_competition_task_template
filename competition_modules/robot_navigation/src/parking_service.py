@@ -14,7 +14,7 @@ import rospy
 import tf
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
-from robot_navagation.srv import *
+from robot_navigation.srv import *
 from apriltags2_ros.msg import AprilTagDetectionArray, AprilTagDetection
 from math import pi, atan2, sqrt
 
@@ -50,7 +50,7 @@ class Parking(object):
 		y_d = self.park_y.get(str(target_id))
 		th_d = self.park_th.get(str(target_id))
 		# Arrive temporary point first
-		if self.target_id == 5:
+		if target_id == 5:
 			x_d += self.dist_from_park
 		else:
 			x_d -= self.dist_from_park
@@ -101,14 +101,16 @@ class Parking(object):
 				self.pub_cmd.publish(cmd)
 				rospy.sleep(time/2)
 				cmd = Twist()
-                                self.pub_cmd.publish(cmd)
-				print "reach goal"
+        self.pub_cmd.publish(cmd)
+			elif dist <= self.dist_thres:
 				if self.sign == 0:
+					print "reach waypoint"
 					self.sign = 1
+					x_d = self.park_x.get(str(target_id)) # Set x_d to parking lot x
 				else:
+					print "reach final goal"
 					break
 				continue
-			x_d = park_x.get(str(self.target_id)) # Set x_d to parking lot x
 		print "Complete"
 		res = robot_navigationResponse()
 		res.tracking = "Complete"
@@ -118,5 +120,4 @@ class Parking(object):
 if __name__ == "__main__":
 	rospy.init_node("parking_node")
 	parking = Parking()
-	parking.park()
 	rospy.spin()
