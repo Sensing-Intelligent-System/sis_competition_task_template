@@ -31,14 +31,19 @@ class moveit_tutorial(object):
 				check = True
 		
 		if tag_id >=0 and tag_id<3:
+			# ############################			
+			print "Allen 1"			
 			# First initialize moveit_commander
 			moveit_commander.roscpp_initialize(sys.argv)
 	
 			# Instantiate a RobotCommander object. 
 			# Provides information such as the robot's kinematic model and the robot's current joint states
+			# ############################
+			print "Allen 2"
 			self.robot = moveit_commander.RobotCommander()
 	
-	
+			# ############################
+			print "Allen 3"
 			# We can get the name of the reference frame for this robot:
 			planning_frame = self.move_group.get_planning_frame()
 			print "============ Planning frame: %s" % planning_frame
@@ -55,21 +60,24 @@ class moveit_tutorial(object):
 			# robot:
 			print "============ Printing robot state", self.robot.get_current_state()
 			print ""
-			
+			# ############################
+			print "Allen close"
 			### close gripper
 	
 			rospy.sleep(2)
 			grip_data = Float64()
 			grip_data.data = 2.0 
 			self.pub_gripper.publish(grip_data)
-			
+			# ############################
+			print "Allen home"
 			### Go home
 			self.home() 
 	
 			############################ Method : Using IK to calculate joint value ############################
 	
 			# After determining a specific point where arm should move, we input x,y,z,degree to calculate joint value for each wrist. 
-	
+			# ############################
+			print "Allen position"
 			pose_goal = Pose()
 			pose_goal.position.x = 0.141
 			pose_goal.position.y = 0.020
@@ -85,7 +93,8 @@ class moveit_tutorial(object):
 					self.move_group.go(joint, wait=True)
 				except:
 					rospy.loginfo(str(joint) + " isn't a valid configuration.")
-			
+			# ############################
+			print "Allen open"
 			### open gripper
 	
 			rospy.sleep(2)
@@ -93,7 +102,9 @@ class moveit_tutorial(object):
 			grip_data.data = 0.5
 			self.pub_gripper.publish(grip_data)
 			rospy.sleep(2)
-	
+			
+			# ############################
+			print "Allen home"
 			### Go home
 			self.home() 
 		else:
