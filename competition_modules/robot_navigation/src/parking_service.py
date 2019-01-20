@@ -118,5 +118,4 @@ class Parking(object):
 if __name__ == "__main__":
 	rospy.init_node("parking_node")
 	parking = Parking()
-	parking.park()
 	rospy.spin()
