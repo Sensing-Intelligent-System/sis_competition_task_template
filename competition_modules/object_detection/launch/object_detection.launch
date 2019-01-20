@@ -1,0 +1,10 @@
+<launch>
+
+  <arg name="tru" default="True"/>
+  <arg name="sim" default="True"/>
+  <node name="task1_detection" pkg="object_detection" type="task1_detection.py" output="screen"/>
+  <param name="pre_parameter" value="$(arg tru)"/>
+  <param name="sim_parameter" value="$(arg sim)"/>
+
+</launch>
+

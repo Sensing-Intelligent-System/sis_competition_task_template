@@ -1,0 +1,6 @@
+#Request data
+---
+#Response data
+string state
+sensor_msgs/Image image
+

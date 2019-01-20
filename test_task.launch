@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find sis_arm_planning)/launch/manipulation_tx2.launch"/>
+  <include file="$(find place_to_box)/launch/moveit_tutorial.launch"/>
+
+  <include file="$(find pose_estimate_and_pick)/launch/pose_estimate_and_pick.launch" />
+
+</launch>

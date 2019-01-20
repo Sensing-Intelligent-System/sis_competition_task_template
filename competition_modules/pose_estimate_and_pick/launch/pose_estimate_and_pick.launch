@@ -1,0 +1,7 @@
+<launch>
+
+  <node name="task2_estimation" pkg="pose_estimate_and_pick" type="task2_estimate.py" output="screen"/>
+  <node name="task2_pick" pkg="pose_estimate_and_pick" type="task2_pick.py" output="screen"/>
+
+</launch>
+

@@ -1,0 +1,3 @@
+<launch>
+<node pkg="place_to_box" type="moveit_tutorial.py" name="moveit_tutorial" output="screen"/>
+</launch>

@@ -1,6 +1,16 @@
 <launch>
+  
+  <!-- Task1 -->
+  <include file="$(find robot_navigation)/launch/robot_navigation.launch" />
 
-  <!-- TODO -->
-  <!-- You need to determine which node you wand to launch in this task -->
+  <!-- Task2 -->
+  <include file="$(find pose_estimate_and_pick)/launch/pose_estimate_and_pick.launch" />
+
+  <!-- Task3 -->
+  <include file="$(find object_detection)/launch/object_detection.launch" />
+
+  <!-- Task4 -->
+  <include file="$(find sis_arm_planning)/launch/manipulation_tx2.launch" />
+  <include file="$(find place_to_box)/launch/moveit_tutorial.launch" />
 
 </launch>

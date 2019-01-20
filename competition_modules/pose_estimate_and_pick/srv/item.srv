@@ -1,0 +1,7 @@
+#Request data
+int32 id
+---
+#Response data
+string state
+int32 x_center
+int32 y_center
