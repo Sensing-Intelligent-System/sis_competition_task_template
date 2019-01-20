@@ -101,13 +101,14 @@ class Parking(object):
 				self.pub_cmd.publish(cmd)
 				rospy.sleep(time/2)
 				cmd = Twist()
-                                self.pub_cmd.publish(cmd)
-				print "reach"
+        self.pub_cmd.publish(cmd)
 			elif dist <= self.dist_thres:
 				if self.sign == 0:
+					print "reach waypoint"
 					self.sign = 1
-					x_d = park_x.get(str(target_id)) # Set x_d to parking lot x
+					x_d = self.park_x.get(str(target_id)) # Set x_d to parking lot x
 				else:
+					print "reach final goal"
 					break
 				continue
 		print "Complete"
