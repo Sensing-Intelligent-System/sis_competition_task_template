@@ -102,13 +102,14 @@ class Parking(object):
 				rospy.sleep(time/2)
 				cmd = Twist()
                                 self.pub_cmd.publish(cmd)
-				print "reach goal"
 				if self.sign == 0:
+					print "reach waypoint"
 					self.sign = 1
+					x_d = self.park_x.get(str(target_id)) # Set x_d to parking lot x
 				else:
+					print "reach final goal"
 					break
 				continue
-			x_d = park_x.get(str(self.target_id)) # Set x_d to parking lot x
 		print "Complete"
 		res = robot_navigationResponse()
 		res.tracking = "Complete"
