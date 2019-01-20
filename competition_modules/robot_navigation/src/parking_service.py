@@ -50,7 +50,7 @@ class Parking(object):
 		y_d = self.park_y.get(str(target_id))
 		th_d = self.park_th.get(str(target_id))
 		# Arrive temporary point first
-		if self.target_id == 5:
+		if target_id == 5:
 			x_d += self.dist_from_park
 		else:
 			x_d -= self.dist_from_park
