@@ -14,7 +14,7 @@ import rospy
 import tf
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
-from robot_navagation.srv import *
+from robot_navigation.srv import *
 from apriltags2_ros.msg import AprilTagDetectionArray, AprilTagDetection
 from math import pi, atan2, sqrt
 
