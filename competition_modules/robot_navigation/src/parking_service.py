@@ -108,7 +108,7 @@ class Parking(object):
 				else:
 					break
 				continue
-			x_d = park_x.get(str(self.target_id)) # Set x_d to parking lot x
+			x_d = park_x.get(str(target_id)) # Set x_d to parking lot x
 		print "Complete"
 		res = robot_navigationResponse()
 		res.tracking = "Complete"
