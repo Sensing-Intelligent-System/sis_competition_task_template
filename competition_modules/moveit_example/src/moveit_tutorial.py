@@ -59,7 +59,7 @@ class moveit_tutorial(object):
 
                 rospy.sleep(2)
                 grip_data = Float64()
-		grip_data.data = 1.2
+		grip_data.data = 1.4
                 self.pub_gripper.publish(grip_data)
 		rospy.sleep(2)
 
@@ -72,7 +72,7 @@ class moveit_tutorial(object):
 
 		pose_goal = Pose()
 		pose_goal.position.x = 0.146
-		pose_goal.position.y = 0.022
+		pose_goal.position.y = 0.009
 		pose_goal.position.z = 0.042
 		# ik_4dof.ik_solver(x, y, z, degree)
 		joint_value = ik_4dof.ik_solver(pose_goal.position.x, pose_goal.position.y, pose_goal.position.z, -90)
