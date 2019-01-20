@@ -106,10 +106,10 @@ class Parking(object):
 			elif dist <= self.dist_thres:
 				if self.sign == 0:
 					self.sign = 1
+					x_d = park_x.get(str(target_id)) # Set x_d to parking lot x
 				else:
 					break
 				continue
-			x_d = park_x.get(str(target_id)) # Set x_d to parking lot x
 		print "Complete"
 		res = robot_navigationResponse()
 		res.tracking = "Complete"
