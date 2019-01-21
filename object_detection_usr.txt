@@ -1,0 +1,34 @@
+laptop$ ssh nvidia@[hostname].local
+TX2_car$ cd ~
+TX2_car$ git clone _______________________________________________________________
+
+------GUI interface--------
+TX2_car$  export DISPLAY=:0 && xrandr --fb 1800x900
+TX2_car$  x11vnc
+
+laptop $ vncviewer  -quality 5 -encodings "tight"  [your tx2 hostname].local:[port]
+TX2_car$ xhost +
+=============================================================================================
+
+TX2_car$ cd ~/sis_mini_competition
+
+TX2_car$ source docker_build.sh
+
+TX2_car$ xhost +
+
+TX2_car$ docker run -it --rm --name sis_competition --net host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --privileged -v /dev/bus/usb:/dev/bus/usb  sis_competition bash
+
+TX2_car$ Container$ source catkin_ws/devel/setup.bash
+
+TX2_car$ Container$ cd catkin_ws/src/object_detection/launch
+
+TX2_car$ Container$ roslaunch open_realsense_and_vis.launch 
+
+------open another terminal--------
+TX2_car$ docker exec -it sis_competition bash
+
+TX2_car$ Container$ source catkin_ws/devel/setup.bash
+
+TX2_car$ Container$ rosrun object_detection object_detection.py 
+
+TX2_car$ Container$ rosrun object_detection object_Segmentation.py 

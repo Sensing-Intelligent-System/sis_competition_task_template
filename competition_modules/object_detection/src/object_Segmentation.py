@@ -9,7 +9,8 @@ import numpy as np
 import os
 from Segmentation import Segmentation, size_cal
 import cv2  # OpenCV module
-
+import matplotlib.pyplot as plt
+import matplotlib.image as pli
 from sensor_msgs.msg import Image, CameraInfo
 from visualization_msgs.msg import Marker
 from geometry_msgs.msg import Point, Pose, Twist, Vector3, Quaternion
@@ -42,15 +43,15 @@ fx = msg.P[0]
 fy = msg.P[5]
 cx = msg.P[2]
 cy = msg.P[6]
+model_name ="model.pkl"
+model_dir  = "/root/sis_mini_competition_2018/catkin_ws/src/object_detection/src/model"
+segmentation = Segmentation(os.path.join(model_dir, model_name))
 
 def main():
-    model_name ="FCNs_mini_competition_batch10_epoch99_RMSprop_lr0.0001.pkl"
-    model_dir  = "./model"
-    segmentation = Segmentation(os.path.join(model_dir, model_name))
     #    Subscribe to both RGB and Depth images with a Synchronizer
     image_sub = message_filters.Subscriber("/camera/rgb/image_rect_color", Image)
     depth_sub = message_filters.Subscriber("/camera/depth_registered/sw_registered/image_rect", Image)
-    ts = message_filters.ApproximateTimeSynchronizer([image_sub, depth_sub,segmentation], 10, 0.5)
+    ts = message_filters.ApproximateTimeSynchronizer([image_sub, depth_sub], 10, 0.5)
     ts.registerCallback(rosRGBDCallBack)
     rospy.spin()
 
@@ -77,16 +78,21 @@ def HSVObjectDetection(cv_image, toPrint = True):
         cv2.CHAIN_APPROX_SIMPLE)
     return contours, mask_eroded_dilated
 
-def rosRGBDCallBack(rgb_data, depth_data,segmentation):
+def rosRGBDCallBack(rgb_data, depth_data):
     try:
         cv_image = cv_bridge.imgmsg_to_cv2(rgb_data, "bgr8")
         cv_depthimage = cv_bridge.imgmsg_to_cv2(depth_data, "32FC1")
         cv_depthimage2 = np.array(cv_depthimage, dtype=np.float32)
     except CvBridgeError as e:
         print(e)
+    
     pred = segmentation.seg_one_frame(cv_image)
-
-    cv2.imwrite("/home/nvidia/pred_1.bmp",cv_image)
+  
+    plt.figure(figsize=(5, 6))
+    plt.title("prediction2")
+    plt.imshow(pred) 
+    plt.show()
+    #cv2.imwrite("/home/nvidia/pred_1.bmp",mask_eroded_dilated)
     img_result_pub.publish(cv_bridge.cv2_to_imgmsg(cv_image,
         encoding="passthrough"))
 

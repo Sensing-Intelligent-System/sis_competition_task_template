@@ -1,0 +1,21 @@
+﻿First terminal on tx2
+TX2 docker  $ source catkin_ws/devel/setup.sh
+TX2 docker  $ roslaunch sis_arm_planning apriltags2.launch &
+TX2 docker  $ roslaunch sis_arm_planning manipulation_tx2.launch &
+
+
+Second terminal
+TX2  $ ssh ubuntu@mm_pi  (passwd : ubuntu)
+PI3 $ source ~/.bashrc
+PI3 $ source sis_mini_competition_2018/catkin_ws/devel/setup.bash
+PI3 $ roslaunch sis_arm_planning manipulation_pi.launch
+
+
+First terminal on tx2
+TX2 docker  $ roslaunch place_to_box place_to_box.launch
+
+
+Third terminal on tx2()
+TX2  $ docker exec -it sis_competition bash
+TX2 docker  $ source catkin_ws/devel/setup.sh
+TX2 docker  $ rosservice call /place_to_box "tag_id 1"

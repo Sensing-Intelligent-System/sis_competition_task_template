@@ -49,13 +49,13 @@ def main():
     ts.registerCallback(rosRGBDCallBack)
     rospy.spin()
 
-
-def HSVObjectDetection(cv_image, toPrint = True):
+####red
+def HSVObjectDetection_red(cv_image, toPrint = True):
     # convert image to HSV color space
     hsv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
 
     # define range of red color in HSV
-    lower_red = np.array([170,50,50])
+    lower_red = np.array([130,50,50])
     upper_red = np.array([180,255,255])
 
     # Threshold the HSV image to get only red colors
@@ -71,6 +71,51 @@ def HSVObjectDetection(cv_image, toPrint = True):
         cv2.RETR_EXTERNAL,
         cv2.CHAIN_APPROX_SIMPLE)
     return contours, mask_eroded_dilated
+####green
+def HSVObjectDetection_green(cv_image, toPrint = True):
+    # convert image to HSV color space
+    hsv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
+
+    # define range of red color in HSV
+    lower_red = np.array([30,50,50])
+    upper_red = np.array([60,255,255])
+
+    # Threshold the HSV image to get only red colors
+    mask = cv2.inRange(hsv_image, lower_red, upper_red)
+
+    mask_eroded = cv2.erode(mask, None, iterations = 3)
+    mask_eroded_dilated = cv2.dilate(mask_eroded, None, iterations = 3)
+
+    mask_eroded_pub.publish(cv_bridge.cv2_to_imgmsg(mask_eroded,encoding="passthrough"))
+    mask_ero_dil_pub.publish(cv_bridge.cv2_to_imgmsg(mask_eroded_dilated,encoding="passthrough"))
+    image, contours, hierarchy = cv2.findContours(
+        mask_eroded_dilated,
+        cv2.RETR_EXTERNAL,
+        cv2.CHAIN_APPROX_SIMPLE)
+    return contours, mask_eroded_dilated
+####blue
+def HSVObjectDetection_blue(cv_image, toPrint = True):
+    # convert image to HSV color space
+    hsv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
+
+    # define range of red color in HSV
+    lower_red = np.array([70,120,120])
+    upper_red = np.array([110,255,255])
+
+    # Threshold the HSV image to get only red colors
+    mask = cv2.inRange(hsv_image, lower_red, upper_red)
+
+    mask_eroded = cv2.erode(mask, None, iterations = 3)
+    mask_eroded_dilated = cv2.dilate(mask_eroded, None, iterations = 3)
+
+    mask_eroded_pub.publish(cv_bridge.cv2_to_imgmsg(mask_eroded,encoding="passthrough"))
+    mask_ero_dil_pub.publish(cv_bridge.cv2_to_imgmsg(mask_eroded_dilated,encoding="passthrough"))
+    image, contours, hierarchy = cv2.findContours(
+        mask_eroded_dilated,
+        cv2.RETR_EXTERNAL,
+        cv2.CHAIN_APPROX_SIMPLE)
+    return contours, mask_eroded_dilated
+
 
 def rosRGBDCallBack(rgb_data, depth_data):
     try:
@@ -80,10 +125,11 @@ def rosRGBDCallBack(rgb_data, depth_data):
     except CvBridgeError as e:
         print(e)
 
-    contours, mask_image = HSVObjectDetection(cv_image, toPrint = False)
+    org_image=cv_image
+    contours, mask_image = HSVObjectDetection_red(org_image, toPrint = False)
 
-    for cnt in contours:   
-            cv2.drawContours(cv_image, cnt, -1, (0,255,255), 3)
+    for cnt in contours: 
+	    cv2.drawContours(cv_image, cnt, -1, (255,0,0), 3)
 	    side = cv2.arcLength(cnt, False)
             shape = cv2.approxPolyDP(cnt, 0.04 * side, True)
 	    if len(shape) == 3:
@@ -104,7 +150,55 @@ def rosRGBDCallBack(rgb_data, depth_data):
             elif obj_shape == "circle":
                cv2.putText(cv_image, "circle", (x_coor, y_coor), 0, 1,
                    (0, 0, 0), 3)
-    cv2.imwrite("/home/nvidia/detection_1.bmp",cv_image)
+     
+    contours, mask_image = HSVObjectDetection_green(org_image, toPrint = False)
+    for cnt in contours: 
+	    cv2.drawContours(cv_image, cnt, -1, (255,0,0), 3)
+	    side = cv2.arcLength(cnt, False)
+            shape = cv2.approxPolyDP(cnt, 0.04 * side, True)
+	    if len(shape) == 3:
+               obj_shape = "triangle"
+            elif len(shape) == 4:
+               obj_shape = "square"
+            else :
+               obj_shape = "circle"
+    	    if len(cnt) < 1:
+                    continue
+            x_coor, y_coor = cnt[0][0][:]
+            if obj_shape == "triangle":
+               cv2.putText(cv_image, "triangle", (x_coor, y_coor), 0, 1,
+                   (0, 0, 0), 3)
+            elif obj_shape == "square":
+               cv2.putText(cv_image, "square", (x_coor, y_coor), 0, 1,
+                   (0, 0, 0), 3)
+            elif obj_shape == "circle":
+               cv2.putText(cv_image, "circle", (x_coor, y_coor), 0, 1,
+                   (0, 0, 0), 3)
+    contours, mask_image = HSVObjectDetection_blue(org_image, toPrint = False)
+    for cnt in contours: 
+	    cv2.drawContours(cv_image, cnt, -1, (255,0,0), 3)
+	    side = cv2.arcLength(cnt, False)
+            shape = cv2.approxPolyDP(cnt, 0.04 * side, True)
+	    if len(shape) == 3:
+               obj_shape = "triangle"
+            elif len(shape) == 4:
+               obj_shape = "square"
+            else :
+               obj_shape = "circle"
+    	    if len(cnt) < 1:
+                    continue
+            x_coor, y_coor = cnt[0][0][:]
+            if obj_shape == "triangle":
+               cv2.putText(cv_image, "triangle", (x_coor, y_coor), 0, 1,
+                   (0, 0, 0), 3)
+            elif obj_shape == "square":
+               cv2.putText(cv_image, "square", (x_coor, y_coor), 0, 1,
+                   (0, 0, 0), 3)
+            elif obj_shape == "circle":
+               cv2.putText(cv_image, "circle", (x_coor, y_coor), 0, 1,
+                   (0, 0, 0), 3)
+    cv2.imshow("dtect",cv_image)
+    #cv2.imwrite("/home/nvidia/detection_1.bmp",cv_image)
     img_result_pub.publish(cv_bridge.cv2_to_imgmsg(cv_image,
         encoding="passthrough"))
 

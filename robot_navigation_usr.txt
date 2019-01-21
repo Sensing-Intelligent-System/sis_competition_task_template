@@ -1,0 +1,15 @@
+First launch the service server on tx2
+TX2  $ docker run --rm -it --net=host --name=navigation sis_competition bash
+TX2 docker  $ source catkin_ws/devel/setup.sh
+TX2 docker  $ roslaunch robot_navigation robot_navigation.launch >>> 背景執行robot_navigate_node.py
+
+Then launch Sean’s navigation_pi.launch with these parameter in second terminal
+TX2  $ ssh ubuntu@mm_pi  (passwd : ubuntu)
+PI3 $ source ~/.bashrc
+PI3 $ source sis_mini_competition_2018/catkin_ws/devel/setup.bash
+PI3 $ roslaunch sis_mobile navigation_pi.launch car_id:=12
+
+Last, run the service client in third terminal
+TX2  $ docker exec -it navigation bash
+TX2 docker  $ source catkin_ws/devel/setup.sh
+TX2 docker  $ rosrun robot_navigation demo.py
